@@ -2,11 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/image.png" />
+    <link rel="icon" type="image/png" href="/images/lightimage.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body class="dark:bg-gray-900">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      function updateFavicon() {
+        const isDarkMode = document.documentElement.classList.contains("dark");
+        const favicon = document.querySelector("link[rel='icon']");
+        
+        if (favicon) {
+          favicon.href = isDarkMode ? "/images/darkimage.png" : "/images/lightimage.png";
+        }
+      }
+
+      updateFavicon();
+      const observer = new MutationObserver(updateFavicon);
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    </script>
   </body>
 </html>

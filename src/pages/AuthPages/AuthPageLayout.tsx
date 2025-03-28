@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       setIsDarkMode(document.documentElement.classList.contains("dark"));
     };
 
-    // Real-time na pag-monitor kung nagbago ang <html> class
+    // Monitor changes in the <html> class for real-time updates
     const observer = new MutationObserver(checkDarkMode);
     observer.observe(document.documentElement, { attributes: true });
 
@@ -22,8 +22,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="relative flex flex-col justify-center w-full h-screen lg:flex-row dark:bg-gray-900 sm:p-0">
         {children}
         <div
-          className="items-center hidden w-full h-full lg:w-1/2 bg-cover bg-center lg:grid 
-          bg-[url('/images/lightimage.png')] dark:bg-[url('/images/darkimage.png')]"
+          className={`items-center hidden w-full h-full lg:w-1/2 bg-cover bg-center lg:grid 
+          ${isDarkMode ? "bg-[url('/images/darkimage.png')]" : "bg-[url('/images/lightimage.png')]"} `}
           style={{
             backgroundSize: "100% 100%",
           }}
